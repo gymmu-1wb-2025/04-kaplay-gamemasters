@@ -32,6 +32,13 @@ footer {
     background-color: #f0f0f0;
 }
 
+header {
+    grid-area: header;
+    text-align: center;
+    padding: 1em;
+    background-color: #f0f0f0;
+}
+
 canvas {
     border: 1px solid black;
     height: 480px;
