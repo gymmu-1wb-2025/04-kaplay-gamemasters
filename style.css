@@ -4,6 +4,7 @@ body {
     display: grid;
     grid-template-areas:
         "header"
+        "aside"
         "main"
         "footer";
     grid-template-columns: 1fr;
@@ -16,6 +17,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+aside {
+    grid-area: aside;
 }
 
 canvas {
