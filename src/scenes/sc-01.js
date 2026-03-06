@@ -15,15 +15,6 @@ export default function sc01() {
 		"player",
 	]);
 
-	k.add([
-		k.rect(640, 20),
-		k.pos(0, 460),
-		k.color(k.GREEN),
-		k.body({ isStatic: true }),
-		k.area(),
-		"world",
-	]);
-
 	player.onKeyPress("space", () => {
 		player.jump();
 	});
