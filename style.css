@@ -17,10 +17,19 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f0f0f0;
 }
 
 aside {
     grid-area: aside;
+    background-color: #f0f0f0;
+}
+
+footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 1em;
+    background-color: #f0f0f0;
 }
 
 canvas {
