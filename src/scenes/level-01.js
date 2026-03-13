@@ -15,7 +15,6 @@ export default function level01() {
 	let /** @type {GameObj} */ player = null;
 
 	return () => {
-		k.setGravity(1600);
 
 		player = k.add([
 			k.rect(50, 50),

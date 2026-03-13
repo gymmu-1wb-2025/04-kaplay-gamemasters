@@ -3,23 +3,49 @@ body {
     padding: 0;
     display: grid;
     grid-template-areas:
-        "header"
-        "main"
-        "footer";
-    grid-template-columns: 1fr;
+        "header header"
+        "aside main"
+        "footer footer";
+    grid-template-columns: 300px 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100dvh;
 }
 
-main {
+.game-container {
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #6d6c6c;
+}
+
+aside {
+    grid-area: aside;
+    background-color: #a3a2a2;
+}
+
+footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 1em;
+    background-color: #a3a2a2;
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+    padding: 1em;
+    background-color: #a3a2a2;
 }
 
 canvas {
     border: 1px solid black;
     height: 480px;
     width: 640px;
+}
+
+.docu-container {
+    overflow-y: scroll;
+    background-color: #6d6c6c;
 }
