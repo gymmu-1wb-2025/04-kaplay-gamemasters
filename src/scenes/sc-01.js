@@ -4,45 +4,54 @@ import k from "../main";
 
 export default function sc01() {
 
-	let /** @type {GameObj} */ player = null;
+	let /** @type {GameObj} */ player = {
+		choice: ""
+	};
 	let computerChoice = null;
 	let result = null;
 
-	onKeyPress("1", () => {
-		player.Choice = "scissors";
+	let status = "Wähle deine option"
+
+	k.onKeyPress("1", () => {
+		player.choice = "scissors";
 		playGame();
 	});
 
-	onKeyPress("2", () => {
-		player.Choice = "rock";
+	k.onKeyPress("2", () => {
+		player.choice = "rock";
 		playGame();
 	});
 
-	onKeyPress("3", () => {
-		player.Choice = "paper";
+	k.onKeyPress("3", () => {
+		player.choice = "paper";
 		playGame();
 	});
 
+	k.add([k.text(`${status}`), k.pos(320, 240), k.anchor("center")])
 
 
 
+
+function checkPlayerWins(playerChoice, computerChoice) {
+	return (playerChoice === "scissors" && computerChoice === "paper") ||
+		(playerChoice === "rock" && computerChoice === "scissors") ||
+		(playerChoice === "paper" && computerChoice === "rock")
 }
 
-const computerChoice = choose(["scissors", "rock", "paper"]);
-
 function playGame() {
-	computerChoice = choose(["scissors", "rock", "paper"]);
-	if (player.Choice === computerChoice) {
+	let computerChoice = k.choose(["scissors", "rock", "paper"]);
+	if (player.choice === computerChoice) {
 		result = "Unentschieden!";
-	} else if ((player.Choice === "scissors" && computerChoice === "paper") ||
-		(player.Choice === "rock" && computerChoice === "scissors") ||
-		(player.Choice === "paper" && computerChoice === "rock")) {
+		status = "Unentschieden!";
+	} else if (checkPlayerWins(player.choice, computerChoice)) {
 		result = "Du hast gewonnen!";
+		status = "Du hast gewonnen!";
 	} else {
 		result = "Du hast verloren!";
+		status = "Du hast verloren!";
 	}
-	console.log(`Player: ${player.Choice} vs Computer: ${computerChoice}`);
+	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
 	console.log(result);
 
 }
-k.add([k.text("Press 1 for Scissors, 2 for Rock, 3 for Paper"), k.pos(100, 100)]);
+}
