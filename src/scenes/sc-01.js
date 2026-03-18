@@ -10,7 +10,7 @@ export default function sc01() {
 	let computerChoice = null;
 	let result = null;
 
-	let status = "Wähle deine option"
+
 
 	k.onKeyPress("1", () => {
 		player.choice = "scissors";
@@ -27,7 +27,7 @@ export default function sc01() {
 		playGame();
 	});
 
-	k.add([k.text(`${status}`), k.pos(320, 240), k.anchor("center")])
+	const status = k.add([k.text(`Treffen Sie ihre Wahl`), k.pos(320, 240), k.anchor("center")])
 
 
 
@@ -42,16 +42,19 @@ function playGame() {
 	let computerChoice = k.choose(["scissors", "rock", "paper"]);
 	if (player.choice === computerChoice) {
 		result = "Unentschieden!";
-		status = "Unentschieden!";
+		status.text = "Unentschieden!";
 	} else if (checkPlayerWins(player.choice, computerChoice)) {
 		result = "Du hast gewonnen!";
-		status = "Du hast gewonnen!";
+		status.text = "Du hast gewonnen!";
 	} else {
 		result = "Du hast verloren!";
-		status = "Du hast verloren!";
+		status.text = "Du hast verloren!";
 	}
 	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
 	console.log(result);
+	k.wait(1, ()=> {
+		status.text = "treffe eine neue wahl"
+	})
 
 }
 }
