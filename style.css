@@ -21,19 +21,16 @@ body {
 }
 
 aside {
-    grid-area: aside;
     background-color: #a3a2a2;
 }
 
 footer {
-    grid-area: footer;
     text-align: center;
     padding: 1em;
     background-color: #a3a2a2;
 }
 
 header {
-    grid-area: header;
     text-align: center;
     padding: 1em;
     background-color: #a3a2a2;

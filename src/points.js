@@ -20,10 +20,5 @@ k.scene("game", (levelNumber) => {
         }
     }
 
-    // Beispiel: Punkt sammeln
-    k.onCollide("player", "coin", (player, coin) => {
-        k.destroy(coin);
-        addPoint();
-    });
 });
 k.go("game", 1);
