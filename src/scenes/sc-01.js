@@ -16,21 +16,21 @@ export default function sc01() {
 
 	k.onKeyPress("1", () => {
 		if (!canSelect) return;// Blockiere wenn gesperrt
-		player.choice = "scissors";
+		player.choice = "Scissors";
 		playGame();
 
 	});
 
 	k.onKeyPress("2", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
-		player.choice = "rock";
+		player.choice = "Rock";
 		playGame();
 
 	});
 
 	k.onKeyPress("3", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
-		player.choice = "paper";
+		player.choice = "Paper";
 		playGame();
 	});
 
@@ -41,19 +41,39 @@ export default function sc01() {
     k.pos(320, 300),
     k.anchor("center")]);
 
+	 let levelScore = 0;
+	let levelScoreComputer= 0;
 
+    // Punkte-Anzeige
+    const scoreDisplay = k.add([
+        k.text( `${levelScore} : ${levelScoreComputer}`),
+        k.pos(320, 35),
+		k.anchor("center"),
+    ]);
+
+
+
+function addPoints() {
+	if (result === "Du hast gewonnen!") {
+		levelScore++;
+	} else if (result === "Du hast verloren!") {
+		levelScoreComputer++;
+
+	}
+	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;// Aktualisiere die Punkte-Anzeige
+}
 
 
 function checkPlayerWins(playerChoice, computerChoice) {
-	return (playerChoice === "scissors" && computerChoice === "paper") ||
-		(playerChoice === "rock" && computerChoice === "scissors") ||
-		(playerChoice === "paper" && computerChoice === "rock")
+	return (playerChoice === "Scissors" && computerChoice === "Paper") ||
+		(playerChoice === "Rock" && computerChoice === "Scissors") ||
+		(playerChoice === "Paper" && computerChoice === "Rock")
 }
 
 function playGame() {
 	canSelect = false; // Sperre aktiviert
 
-	let computerChoice = k.choose(["scissors", "rock", "paper"]);
+	let computerChoice = k.choose(["Scissors", "Rock", "Paper"]);
 
 	choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
 	if (player.choice === computerChoice) {
@@ -62,19 +82,36 @@ function playGame() {
 	} else if (checkPlayerWins(player.choice, computerChoice)) {
 		result = "Du hast gewonnen!";
 		status.text = "Du hast gewonnen!";
-	} else {
+
+	} else{
 		result = "Du hast verloren!";
 		status.text = "Du hast verloren!";
+
+
 	}
+	addPoints(); // Punkte aktualisieren
+
 	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
 	console.log(result);
 
-	k.wait(3, ()=> {
+	k.wait(2.5, ()=> {
 		status.text = "Treffe eine neue Wahl"
 		 choicesText.text = ""; // Lösche die Wahlen
 		canSelect = true; //Sperre aufheben
 
 	})
+	if (levelScore >= 3) {
+		 // Nächstes Level starten
+            k.go("newLevel");
+			return;
+        }
 
+		if(levelScoreComputer >= 3) {
+			k.go("Gameover")
+			return;
+		}
 }
-}
+
+
+
+};
