@@ -68,3 +68,6 @@ function playGame() {
 
 }
 }
+k.onKeyPress("3 Points", () => {
+		k.go("lvl-02");
+	});
