@@ -1,9 +1,13 @@
+import k from "./main";
+
 scene("game", (levelNumber) => {
+
     let levelScore = 0;
 
     // Punkte-Anzeige
+    k.
     add([
-        text(() => `Level ${levelNumber} - Punkte: ${levelScore}/3`),
+        k.text(() => `Level ${levelNumber} - Punkte: ${levelScore}/3`),
         pos(12, 12),
     ]);
 
