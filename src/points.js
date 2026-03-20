@@ -1,10 +1,13 @@
-scene("game", (levelNumber) => {
+import k from "./main";
+
+k.scene("game", (levelNumber) => {
+
     let levelScore = 0;
 
     // Punkte-Anzeige
-    add([
-        text(() => `Level ${levelNumber} - Punkte: ${levelScore}/3`),
-        pos(12, 12),
+    k.add([
+        k.text(() => `Level ${levelNumber} - Punkte: ${levelScore}/3`),
+        k.pos(12, 12),
     ]);
 
     // Funktion zum Erhöhen der Punkte
@@ -13,16 +16,14 @@ scene("game", (levelNumber) => {
 
         if (levelScore >= 3) {
             // Nächstes Level starten
-            go("game", levelNumber + 1);
+            k.go("game", levelNumber + 1);
         }
     }
 
     // Beispiel: Punkt sammeln
-    onCollide("player", "coin", (player, coin) => {
-        destroy(coin);
+    k.onCollide("player", "coin", (player, coin) => {
+        k.destroy(coin);
         addPoint();
     });
 });
-
-// Spiel mit Level 1 starten
-go("game", 1);
+k.go("game", 1);
