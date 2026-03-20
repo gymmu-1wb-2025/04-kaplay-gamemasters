@@ -2,7 +2,7 @@ import camCenter from "../components/camCenter";
 import controller from "../components/controller";
 import k from "../main";
 
-export default function sc01() {
+export default function sc02() {
 
 	let /** @type {GameObj} */ player = {
         choice: ""
@@ -10,27 +10,34 @@ export default function sc01() {
 	let computerChoice = null;
 	let result = null;
 
+	let canSelect = true; // Sperre Variable
+
 	k.onKeyPress("1", () => {
+		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "feuer";
 		playGame();
 	});
 
 	k.onKeyPress("2", () => {
+		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "wasser";
 		playGame();
 	});
 
 	k.onKeyPress("3", () => {
+		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "erde";
 		playGame();
 	});
 
     k.onKeyPress("4", () => {
+        if (!canSelect) return; // Blockiere wenn gesperrt
         player.choice = "luft";
         playGame();
     });
 
     k.onKeyPress("5", () => {
+        if (!canSelect) return; // Blockiere wenn gesperrt
         player.choice = "blitz";
         playGame();
     });
@@ -52,6 +59,7 @@ return player.choice === "feuer" && computerChoice === "erde" ||
 }
 
 function playGame() {
+	canSelect = false; // Sperre aktiviert
 	computerChoice = choose(["feuer", "wasser", "erde", "luft", "blitz"]);
 	if (player.choice === computerChoice) {
 		result = "Unentschieden!";
@@ -67,7 +75,7 @@ function playGame() {
 	console.log(result);
     k.wait(1, () => {
         status.text = "Treffen Sie Ihre Wahl";
-        canSelect = true;
+        canSelect = true; //Sperre aufheben
     });
 
 }
