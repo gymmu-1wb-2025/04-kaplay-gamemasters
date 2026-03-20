@@ -6,12 +6,3 @@ export default function scEnde() {
 		k.go("sc00");
 	});
 }
-const k = kaplay({
-	height: 480,
-	width: 640,
-	canvas: document.getElementById("game-canvas"),
-	background: "#ff0000",
-	global: false,
-	debug: true,
-	debugKey: "r",
-});

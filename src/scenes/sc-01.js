@@ -12,6 +12,8 @@ export default function sc01() {
 
 	let canSelect = true; // Sperre Variable
 
+
+
 	k.onKeyPress("1", () => {
 		if (!canSelect) return;// Blockiere wenn gesperrt
 		player.choice = "scissors";
@@ -34,6 +36,11 @@ export default function sc01() {
 
 	const status = k.add([k.text(`Treffen Sie Ihre Wahl`), k.pos(320, 240), k.anchor("center")])
 
+	const choicesText = k.add([
+    k.text("",{ size: 24 }),
+    k.pos(320, 300),
+    k.anchor("center")]);
+
 
 
 
@@ -47,6 +54,8 @@ function playGame() {
 	canSelect = false; // Sperre aktiviert
 
 	let computerChoice = k.choose(["scissors", "rock", "paper"]);
+
+	choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
 	if (player.choice === computerChoice) {
 		result = "Unentschieden!";
 		status.text = "Unentschieden!";
@@ -60,8 +69,9 @@ function playGame() {
 	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
 	console.log(result);
 
-	k.wait(1, ()=> {
+	k.wait(3, ()=> {
 		status.text = "Treffe eine neue Wahl"
+		 choicesText.text = ""; // Lösche die Wahlen
 		canSelect = true; //Sperre aufheben
 
 	})

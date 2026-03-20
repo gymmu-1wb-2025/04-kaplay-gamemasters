@@ -17,11 +17,7 @@ scene("game", (levelNumber) => {
         }
     }
 
-    // Beispiel: Punkt sammeln
-    onCollide("player", "coin", (player, coin) => {
-        destroy(coin);
-        addPoint();
-    });
+
 });
 
 // Spiel mit Level 1 starten
