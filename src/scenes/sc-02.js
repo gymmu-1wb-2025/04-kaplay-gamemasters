@@ -12,31 +12,31 @@ export default function sc02() {
 
 	let canSelect = true; // Sperre Variable
 
-	k.onKeyPress("1", () => {
+	k.onClick("b1", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Feuer";
 		playGame();
 	});
 
-	k.onKeyPress("2", () => {
+	k.onClick("b2", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Wasser";
 		playGame();
 	});
 
-	k.onKeyPress("3", () => {
+	k.onClick("b3", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Erde";
 		playGame();
 	});
 
-    k.onKeyPress("4", () => {
+    k.onClick("b4", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
         player.choice = "Luft";
         playGame();
     });
 
-    k.onKeyPress("5", () => {
+    k.onClick("b5", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
         player.choice = "Blitz";
         playGame();
@@ -44,6 +44,56 @@ export default function sc02() {
 
 
 	const status = k.add([k.text(`Treffen Sie Ihre Wahl`), k.pos(320, 240), k.anchor("center")]);
+
+	const fireButton = k.add([
+		k.text("Feuer"),
+		k.area(),
+		k.pos(75, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b1",
+		"button",
+	]);
+
+	const waterButton = k.add([
+		k.text("Wasser"),
+		k.area(),
+		k.pos(200, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b2",
+		"button",
+	]);
+
+	const earthButton = k.add([
+		k.text("Erde"),
+		k.area(),
+		k.pos(325, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b3",
+		"button",
+	]);
+
+	const airButton = k.add([
+		k.text("Luft"),
+		k.area(),
+		k.pos(450, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b4",
+		"button",
+	]);
+
+	const lightningButton = k.add([
+        k.text("Blitz"),
+        k.area(),
+        k.pos(575, 400),
+        k.anchor("center"),
+        k.outline(5, k.WHITE),
+        "b5",
+        "button",
+    ]);
 
 	const choicesText = k.add([
     k.text("",{ size: 24 }),
@@ -87,6 +137,12 @@ return player.choice === "Feuer" && computerChoice === "Erde" ||
 }
 
 function playGame() {
+	canSelect = false; // Sperre aktiviert
+
+	k.get("button").forEach(btn => {
+		btn.hidden = true
+	}); // Verstecke die Buttons nach der Auswahl
+
 	let computerChoice = k. choose(["Feuer", "Wasser", "Erde", "Luft", "Blitz"]);
 
 	choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
@@ -109,6 +165,7 @@ function playGame() {
         status.text = "Treffen Sie Ihre Wahl";
 		choicesText.text = "";
         canSelect = true;
+		k.get("button").forEach(btn => btn.hidden = false);
     });
 	if (levelScore >= 3) {
 		 // Nächstes Level starten

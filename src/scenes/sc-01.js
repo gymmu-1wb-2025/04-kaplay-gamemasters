@@ -14,27 +14,57 @@ export default function sc01() {
 
 
 
-	k.onKeyPress("1", () => {
+	k.onClick("b3", () => {
 		if (!canSelect) return;// Blockiere wenn gesperrt
 		player.choice = "Scissors";
 		playGame();
 
 	});
 
-	k.onKeyPress("2", () => {
+	k.onClick("b2", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Rock";
 		playGame();
 
 	});
 
-	k.onKeyPress("3", () => {
+	k.onClick("b1", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Paper";
 		playGame();
 	});
 
 	const status = k.add([k.text(`Treffen Sie Ihre Wahl`), k.pos(320, 240), k.anchor("center")])
+
+	const scissorsButton = k.add([
+    k.text("Schere"),
+    k.area(),
+    k.pos(125, 400),
+    k.anchor("center"),
+    k.outline(5, k.WHITE),
+    "b3",
+	"button",
+	]);
+
+	const paperButton = k.add([
+    k.text("Papier"),
+    k.area(),
+    k.pos(325, 400),
+    k.anchor("center"),
+    k.outline(5, k.WHITE),
+    "b1",
+	"button",
+	]);
+	const rockButton = k.add([
+    k.text("Stein"),
+    k.area(),
+    k.pos(525, 400),
+    k.anchor("center"),
+    k.outline(5, k.WHITE),
+    "b2",
+	"button",
+	]);
+
 
 	const choicesText = k.add([
     k.text("",{ size: 24 }),
@@ -73,6 +103,11 @@ function checkPlayerWins(playerChoice, computerChoice) {
 function playGame() {
 	canSelect = false; // Sperre aktiviert
 
+	k.get("button").forEach(btn => {
+		btn.hidden = true
+}); // Verstecke die Buttons nach der Auswahl
+
+
 	let computerChoice = k.choose(["Scissors", "Rock", "Paper"]);
 
 	choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
@@ -98,6 +133,7 @@ function playGame() {
 		status.text = "Treffe eine neue Wahl"
 		 choicesText.text = ""; // Lösche die Wahlen
 		canSelect = true; //Sperre aufheben
+		k.get("button").forEach(btn => btn.hidden = false); // Verstecke die Buttons nach der Auswahl
 
 	})
 	if (levelScore >= 3) {
