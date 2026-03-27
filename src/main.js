@@ -10,7 +10,7 @@ const k = kaplay({
 	height: 480,
 	width: 640,
 	canvas: document.getElementById("game-canvas"),
-	background: "#4f7474",
+	background: "#0f06f8",
 	global: false,
 	debug: true,
 	debugKey: "r",
