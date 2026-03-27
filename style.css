@@ -4,12 +4,14 @@ body {
     display: grid;
     grid-template-areas:
         "header header"
-        "aside main"
+        "main main"
         "footer footer";
     grid-template-columns: 300px 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100dvh;
 }
+
+
 
 .game-container {
     height: 100%;
@@ -17,12 +19,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #6d6c6c;
-}
-
-aside {
     background-color: #a3a2a2;
 }
+
 
 footer {
     text-align: center;
