@@ -45,3 +45,9 @@ canvas {
     overflow-y: scroll;
     background-color: #6d6c6c;
 }
+
+.img-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+}
