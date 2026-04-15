@@ -3,126 +3,180 @@ import controller from "../components/controller";
 import k from "../main";
 
 export default function sc02() {
+
 	let /** @type {GameObj} */ player = {
-			choice: "",
-		};
+        choice: ""
+    };
 	let computerChoice = null;
 	let result = null;
 
 	let canSelect = true; // Sperre Variable
 
-	k.onKeyPress("1", () => {
+	k.onClick("b1", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Feuer";
 		playGame();
 	});
 
-	k.onKeyPress("2", () => {
+	k.onClick("b2", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Wasser";
 		playGame();
 	});
 
-	k.onKeyPress("3", () => {
+	k.onClick("b3", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
 		player.choice = "Erde";
 		playGame();
 	});
 
-	k.onKeyPress("4", () => {
+    k.onClick("b4", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
-		player.choice = "Luft";
-		playGame();
-	});
+        player.choice = "Luft";
+        playGame();
+    });
 
-	k.onKeyPress("5", () => {
+    k.onClick("b5", () => {
 		if (!canSelect) return; // Blockiere wenn gesperrt
-		player.choice = "Blitz";
-		playGame();
-	});
+        player.choice = "Blitz";
+        playGame();
+    });
 
-	const status = k.add([
-		k.text(`Treffen Sie Ihre Wahl`),
-		k.pos(320, 240),
+
+	const status = k.add([k.text(`Treffen Sie Ihre Wahl`), k.pos(320, 240), k.anchor("center")]);
+
+	const fireButton = k.add([
+		k.text("Feuer"),
+		k.area(),
+		k.pos(75, 400),
 		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b1",
+		"button",
 	]);
+
+	const waterButton = k.add([
+		k.text("Wasser"),
+		k.area(),
+		k.pos(200, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b2",
+		"button",
+	]);
+
+	const earthButton = k.add([
+		k.text("Erde"),
+		k.area(),
+		k.pos(325, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b3",
+		"button",
+	]);
+
+	const airButton = k.add([
+		k.text("Luft"),
+		k.area(),
+		k.pos(450, 400),
+		k.anchor("center"),
+		k.outline(5, k.WHITE),
+		"b4",
+		"button",
+	]);
+
+	const lightningButton = k.add([
+        k.text("Blitz"),
+        k.area(),
+        k.pos(575, 400),
+        k.anchor("center"),
+        k.outline(5, k.WHITE),
+        "b5",
+        "button",
+    ]);
 
 	const choicesText = k.add([
-		k.text("", { size: 24 }),
-		k.pos(320, 300),
+    k.text("",{ size: 24 }),
+    k.pos(320, 300),
+    k.anchor("center")]);
+
+	 let levelScore = 0;
+	let levelScoreComputer= 0;
+
+    // Punkte-Anzeige
+    const scoreDisplay = k.add([
+        k.text( `${levelScore} : ${levelScoreComputer}`),
+        k.pos(320, 35),
 		k.anchor("center"),
-	]);
+    ]);
 
-	let levelScore = 0;
-	let levelScoreComputer = 0;
 
-	// Punkte-Anzeige
-	const scoreDisplay = k.add([
-		k.text(`${levelScore} : ${levelScoreComputer}`),
-		k.pos(320, 35),
-		k.anchor("center"),
-	]);
 
-	function addPoints() {
-		if (result === "Du hast gewonnen!") {
-			levelScore++;
-		} else if (result === "Du hast verloren!") {
-			levelScoreComputer++;
-		}
+function addPoints() {
+	if (result === "Du hast gewonnen!") {
+		levelScore++;
+	} else if (result === "Du hast verloren!") {
+		levelScoreComputer++;
 
-		scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`; // Aktualisiere die Punkte-Anzeige
 	}
 
-	function checkPlayerWins(playerChoice, computerChoice) {
-		return (
-			(player.choice === "Feuer" && computerChoice === "Erde") ||
-			(player.choice === "Feuer" && computerChoice === "Luft") ||
-			(player.choice === "Wasser" && computerChoice === "Feuer") ||
-			(player.choice === "Wasser" && computerChoice === "Blitz") ||
-			(player.choice === "Erde" && computerChoice === "Wasser") ||
-			(player.choice === "Erde" && computerChoice === "Blitz") ||
-			(player.choice === "Luft" && computerChoice === "Erde") ||
-			(player.choice === "Luft" && computerChoice === "Wasser") ||
-			(player.choice === "Blitz" && computerChoice === "Feuer") ||
-			(player.choice === "Blitz" && computerChoice === "Luft")
-		);
+	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;// Aktualisiere die Punkte-Anzeige
+}
+
+function checkPlayerWins(playerChoice, computerChoice) {
+return player.choice === "Feuer" && computerChoice === "Erde" ||
+		(player.choice === "Feuer" && computerChoice === "Luft") ||
+		(player.choice === "Wasser" && computerChoice === "Feuer") ||
+		(player.choice === "Wasser" && computerChoice === "Blitz") ||
+		(player.choice === "Erde" && computerChoice === "Wasser") ||
+		(player.choice === "Erde" && computerChoice === "Blitz") ||
+        (player.choice === "Luft" && computerChoice === "Erde") ||
+        (player.choice === "Luft" && computerChoice === "Wasser") ||
+        (player.choice === "Blitz" && computerChoice === "Feuer") ||
+        (player.choice === "Blitz" && computerChoice === "Luft")
+}
+
+function playGame() {
+	canSelect = false; // Sperre aktiviert
+
+	k.get("button").forEach(btn => {
+		btn.hidden = true
+	}); // Verstecke die Buttons nach der Auswahl
+
+	let computerChoice = k. choose(["Feuer", "Wasser", "Erde", "Luft", "Blitz"]);
+
+	choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
+	if (player.choice === computerChoice) {
+		result = "Unentschieden!";
+        status.text = "Unentschieden!"
+	} else if (checkPlayerWins(player.choice, computerChoice)) {
+		result = "Du hast gewonnen!";
+        status.text = "Du hast gewonnen!"
+	} else {
+		result = "Du hast verloren!";
+        status.text = "Du hast verloren!"
 	}
+	addPoints(); // Punkte aktualisieren
 
-	function playGame() {
-		canSelect = false; // Sperre aktiviert
+	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
+	console.log(result);
 
-		let computerChoice = k.choose(["Feuer", "Wasser", "Erde", "Luft", "Blitz"]);
+    k.wait(2.5, () => {
+        status.text = "Treffen Sie Ihre Wahl";
+		choicesText.text = "";
+        canSelect = true;
+		k.get("button").forEach(btn => btn.hidden = false);
+    });
+	if (levelScore >= 3) {
+		 // Nächstes Level starten
+            k.go("Win");
+			return;
+        }
 
-		choicesText.text = `Spieler: ${player.choice} vs Computer: ${computerChoice}`;
-		if (player.choice === computerChoice) {
-			result = "Unentschieden!";
-			status.text = "Unentschieden!";
-		} else if (checkPlayerWins(player.choice, computerChoice)) {
-			result = "Du hast gewonnen!";
-			status.text = "Du hast gewonnen!";
-		} else {
-			result = "Du hast verloren!";
-			status.text = "Du hast verloren!";
-		}
-		addPoints(); // Punkte aktualisieren
-
-		console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
-		console.log(result);
-
-		k.wait(2.5, () => {
-			status.text = "Treffen Sie Ihre Wahl";
-			choicesText.text = "";
-			canSelect = true;
-		});
-		if (levelScore >= 3) {
-			// Nächstes Level starten
-			k.go("Win");
+		if(levelScoreComputer >= 3) {
+			k.go("Gameover")
 			return;
 		}
 
-		if (levelScoreComputer >= 3) {
-			k.go("Gameover");
-			return;
-		}
-	}
+}
 }
