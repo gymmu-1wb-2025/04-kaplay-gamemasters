@@ -40,6 +40,7 @@ export default function sc01() {
     k.text("Schere"),
     k.area(),
     k.pos(125, 400),
+	k.color(k.rgb(255, 255, 255)),
     k.anchor("center"),
     k.outline(5, k.WHITE),
     "b3",
@@ -50,6 +51,7 @@ export default function sc01() {
     k.text("Papier"),
     k.area(),
     k.pos(325, 400),
+	k.color(k.rgb(255, 255, 255)),
     k.anchor("center"),
     k.outline(5, k.WHITE),
     "b1",
@@ -59,11 +61,22 @@ export default function sc01() {
     k.text("Stein"),
     k.area(),
     k.pos(525, 400),
+	k.color(k.rgb(255, 255, 255)),
     k.anchor("center"),
     k.outline(5, k.WHITE),
     "b2",
 	"button",
 	]);
+
+	k.get("button").forEach(btn => {
+    btn.onHoverUpdate(() => {
+        btn.color = k.rgb(100, 200, 255); // Hellblau beim Hovern
+    });
+
+    btn.onHoverEnd(() => {
+        btn.color = k.rgb(255, 255, 255); // Zurück zu Weiß
+    });
+});
 
 
 	const choicesText = k.add([
