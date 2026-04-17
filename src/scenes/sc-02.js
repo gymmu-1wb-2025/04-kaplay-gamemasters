@@ -13,31 +13,31 @@ export default function sc02() {
 	let canSelect = true; // Sperre Variable
 
 	k.onClick("b1", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return; // KI erstellt: Prompt in Scene 1.
 		player.choice = "Feuer";
 		playGame();
 	});
 
 	k.onClick("b2", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return;
 		player.choice = "Wasser";
 		playGame();
 	});
 
 	k.onClick("b3", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return;
 		player.choice = "Erde";
 		playGame();
 	});
 
     k.onClick("b4", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return;
         player.choice = "Luft";
         playGame();
     });
 
     k.onClick("b5", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return;
         player.choice = "Blitz";
         playGame();
     });
@@ -102,7 +102,7 @@ export default function sc02() {
 
 	k.get("button").forEach(btn => {
     btn.onHoverUpdate(() => {
-        btn.color = k.rgb(100, 200, 255); // Hellblau beim Hovern
+        btn.color = k.rgb(100, 200, 255); //  Ki erstellt: Prompt in Scene 1
     });
 
     btn.onHoverEnd(() => {
@@ -118,7 +118,7 @@ export default function sc02() {
 	 let levelScore = 0;
 	let levelScoreComputer= 0;
 
-    // Punkte-Anzeige
+    // zum Teil mi Ki erstellt: Promt in Scene 1,
     const scoreDisplay = k.add([
         k.text( `${levelScore} : ${levelScoreComputer}`),
         k.pos(320, 35),
@@ -135,7 +135,7 @@ function addPoints() {
 
 	}
 
-	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;// Aktualisiere die Punkte-Anzeige
+	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;
 }
 
 function checkPlayerWins(playerChoice, computerChoice) {
@@ -152,11 +152,11 @@ return player.choice === "Feuer" && computerChoice === "Erde" ||
 }
 
 function playGame() {
-	canSelect = false; // Sperre aktiviert
+	canSelect = false;
 
 	k.get("button").forEach(btn => {
 		btn.hidden = true
-	}); // Verstecke die Buttons nach der Auswahl
+	}); //Ki erstellt: Prompt in Scene 1.
 
 	let computerChoice = k. choose(["Feuer", "Wasser", "Erde", "Luft", "Blitz"]);
 
@@ -171,7 +171,7 @@ function playGame() {
 		result = "Du hast verloren!";
         status.text = "Du hast verloren!"
 	}
-	addPoints(); // Punkte aktualisieren
+	addPoints();
 
 	console.log(`Player: ${player.choice} vs Computer: ${computerChoice}`);
 	console.log(result);
@@ -179,11 +179,10 @@ function playGame() {
     k.wait(2.5, () => {
         status.text = "Treffen Sie Ihre Wahl";
 		choicesText.text = "";
-        canSelect = true;
-		k.get("button").forEach(btn => btn.hidden = false);
+        canSelect = true; //Ki erstellt: Prompt in Scene 1
+		k.get("button").forEach(btn => btn.hidden = false); //Ki erstellt: Prompt in Scene 1,
     });
 	if (levelScore >= 3) {
-		 // Nächstes Level starten
             k.go("Win");
 			return;
         }

@@ -10,26 +10,25 @@ export default function sc01() {
 	let computerChoice = null;
 	let result = null;
 
-	let canSelect = true; // Sperre Variable
-
+	let canSelect = true;
 
 
 	k.onClick("b3", () => {
-		if (!canSelect) return;// Blockiere wenn gesperrt
+		if (!canSelect) return;//Ki erstellt: Sperre, damit der Spieler nicht mehrmals hintereinander wählen kann.
 		player.choice = "Scissors";
 		playGame();
 
 	});
 
 	k.onClick("b2", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return; // Ki erstellt: Sperre, damit der Spieler nicht mehrmals hintereinander wählen kann.
 		player.choice = "Rock";
 		playGame();
 
 	});
 
 	k.onClick("b1", () => {
-		if (!canSelect) return; // Blockiere wenn gesperrt
+		if (!canSelect) return; // Ki erstellt: Sperre, damit der Spieler nicht mehrmals hintereinander wählen kann.
 		player.choice = "Paper";
 		playGame();
 	});
@@ -70,11 +69,11 @@ export default function sc01() {
 
 	k.get("button").forEach(btn => {
     btn.onHoverUpdate(() => {
-        btn.color = k.rgb(100, 200, 255); // Hellblau beim Hovern
+        btn.color = k.rgb(100, 200, 255); //Ki erstellt: Farb änderung von Curser wenn über Button.
     });
 
     btn.onHoverEnd(() => {
-        btn.color = k.rgb(255, 255, 255); // Zurück zu Weiß
+        btn.color = k.rgb(255, 255, 255); //Ki erstellt: Farb änderung von Curser wenn nicht mehr über Button.
     });
 });
 
@@ -87,7 +86,7 @@ export default function sc01() {
 	 let levelScore = 0;
 	let levelScoreComputer= 0;
 
-    // Punkte-Anzeige
+    // Zum Teil mit Ki erstellt: Habe Probleme mit der Punkte Anzeige, da sie nicht aktualisiert wird (Code), (Ki hat mir die Fehler behoben)
     const scoreDisplay = k.add([
         k.text( `${levelScore} : ${levelScoreComputer}`),
         k.pos(320, 35),
@@ -103,7 +102,7 @@ function addPoints() {
 		levelScoreComputer++;
 
 	}
-	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;// Aktualisiere die Punkte-Anzeige
+	scoreDisplay.text = `${levelScore} : ${levelScoreComputer}`;
 }
 
 
@@ -118,7 +117,7 @@ function playGame() {
 
 	k.get("button").forEach(btn => {
 		btn.hidden = true
-}); // Verstecke die Buttons nach der Auswahl
+}); // Ki erstellt: Verstecke Buttons nach der Auswahl.
 
 
 	let computerChoice = k.choose(["Scissors", "Rock", "Paper"]);
@@ -145,12 +144,11 @@ function playGame() {
 	k.wait(2.5, ()=> {
 		status.text = "Treffe eine neue Wahl"
 		 choicesText.text = ""; // Lösche die Wahlen
-		canSelect = true; //Sperre aufheben
-		k.get("button").forEach(btn => btn.hidden = false); // Verstecke die Buttons nach der Auswahl
+		canSelect = true; // Ki erstellt: Sperre aufheben, damit der Spieler erneut wählen kann.
+		k.get("button").forEach(btn => btn.hidden = false); //Ki erstellt: Buttons wieder sichtbar machen, damit der Spieler erneut wählen kann.
 
 	})
 	if (levelScore >= 3) {
-		 // Nächstes Level starten
             k.go("newLevel");
 			return;
         }
