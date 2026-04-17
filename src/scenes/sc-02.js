@@ -49,6 +49,7 @@ export default function sc02() {
 		k.text("Feuer"),
 		k.area(),
 		k.pos(75, 400),
+		k.color(k.rgb(255, 255, 255)),
 		k.anchor("center"),
 		k.outline(5, k.WHITE),
 		"b1",
@@ -59,6 +60,7 @@ export default function sc02() {
 		k.text("Wasser"),
 		k.area(),
 		k.pos(200, 400),
+		k.color(k.rgb(255, 255, 255)),
 		k.anchor("center"),
 		k.outline(5, k.WHITE),
 		"b2",
@@ -69,6 +71,7 @@ export default function sc02() {
 		k.text("Erde"),
 		k.area(),
 		k.pos(325, 400),
+		k.color(k.rgb(255, 255, 255)),
 		k.anchor("center"),
 		k.outline(5, k.WHITE),
 		"b3",
@@ -79,6 +82,7 @@ export default function sc02() {
 		k.text("Luft"),
 		k.area(),
 		k.pos(450, 400),
+		k.color(k.rgb(255, 255, 255)),
 		k.anchor("center"),
 		k.outline(5, k.WHITE),
 		"b4",
@@ -89,11 +93,22 @@ export default function sc02() {
         k.text("Blitz"),
         k.area(),
         k.pos(575, 400),
+		k.color(k.rgb(255, 255, 255)),
         k.anchor("center"),
         k.outline(5, k.WHITE),
         "b5",
         "button",
     ]);
+
+	k.get("button").forEach(btn => {
+    btn.onHoverUpdate(() => {
+        btn.color = k.rgb(100, 200, 255); // Hellblau beim Hovern
+    });
+
+    btn.onHoverEnd(() => {
+        btn.color = k.rgb(255, 255, 255); // Zurück zu Weiß
+    });
+});
 
 	const choicesText = k.add([
     k.text("",{ size: 24 }),
