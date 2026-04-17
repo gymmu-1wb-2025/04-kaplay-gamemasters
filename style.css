@@ -11,6 +11,11 @@ body {
     height: 100dvh;
 }
 
+main {
+    padding: 0.5em;
+    background-color: #a3a2a2;
+
+}
 
 
 .game-container {
